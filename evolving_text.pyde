@@ -18,14 +18,14 @@ class GeneticEvolution:
         for i in range(100):
             sample = ''
             for i in range(len(s)):
-                sample+= chr(int(random(97,123)))
-            self.population.append(Sample(sample,self.fitness(sample)))
+                sample+= chr(int(rn.randint(97,123)))
+            self.population.append(rn.Sample(sample,self.fitness(sample)))
     def fitness(self,sample):
-        score=0
+        self.score=0
         for i,j in zip(list(sample),list(self.s)):
             if i==j:
                 score+=1
-        return score
+        return self.score
     def selection(self):
         new_population = []
        
@@ -41,11 +41,11 @@ class GeneticEvolution:
             parents = rn.sample(self.population,2)
             child = ''
             for i,j in zip(list(parents[0].s),list(parents[1].s)):
-                if random(0,1)<0.5:
+                if rn.random()<0.5:
                     child+=i
                 else:
                     child+=j
-            self.population.append(Sample(child,self.fitness(child)))
+            self.population.append(rn.Sample(child,self.fitness(child)))
            
     def mutation(self):
         new_population = []
@@ -53,12 +53,12 @@ class GeneticEvolution:
         for sample in self.population:
             mutated = ''
             for i in sample.s:
-                if random(0,1)<self.mutation_rate:
-                    mutated += chr(int(random(97,123)))
+                if rn.random()<self.mutation_rate:
+                    mutated += chr(int(rn.randint(97,123)))
                 else:
                     mutated += i
        
-            new_population.append(Sample(mutated,self.fitness(mutated)))
+            new_population.append(rn.Sample(mutated,self.fitness(mutated)))
         self.population = new_population
    
     def evolution(self):
@@ -75,12 +75,7 @@ class GeneticEvolution:
             self.mutation()
             if generation>1000:
                 return None
-           
-           
-   
-     
-     
-       
+            
 g = GeneticEvolution('hel')
 g.evolution()
 def brute_force(s):
@@ -88,7 +83,7 @@ def brute_force(s):
     while True:
         e = ''
         for i in range(len(s)):
-            e+=chr(int(random(97,123)))
+            e+=chr(int(rn.randint(97,123)))
         if e==s:
             return count
         print(e)
