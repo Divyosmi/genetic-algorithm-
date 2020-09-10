@@ -73,7 +73,7 @@ class GeneticEvolution:
                 return self.population[0]
             self.crossover()
             self.mutation()
-            if generation>1000:
+            if generation>10000:
                 return None
             
 g = GeneticEvolution('hel')
